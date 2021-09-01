@@ -60,4 +60,6 @@ $ yarn start
 ```
 <hr /> 
 
-Made with 💜
+<div align="center">
+  Made with 💜
+</div>
