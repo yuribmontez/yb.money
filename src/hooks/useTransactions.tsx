@@ -19,6 +19,7 @@ type TransactionInput = Omit<Transaction, 'id' | 'createdAt'>
 interface TransactionsContextData {
   transactions: Transaction[];
   createTransaction: (transaction: TransactionInput) => Promise<void>;
+  clearTransactions: () => void
 }
 
 
@@ -28,8 +29,20 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
   useEffect(() => {
-    api.get('transactions').then(response => setTransactions(response.data.transactions))
+    const storagedTransactions = localStorage.getItem('@dtmoney:transactions')
+
+    if (storagedTransactions) {
+      const currentTransactions = JSON.parse(storagedTransactions)
+      setTransactions(currentTransactions)
+    } else {
+      api.get('transactions').then(response => setTransactions(response.data.transactions))
+    }
+
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem('@dtmoney:transactions', JSON.stringify(transactions))
+  }, [transactions])
 
   async function createTransaction(transactionInput: TransactionInput) {
     const response = await api.post('/transactions', {...transactionInput, createdAt: new Date()})
@@ -39,8 +52,12 @@ export function TransactionProvider({ children }: TransactionProviderProps) {
     setTransactions([ ...transactions, transaction ])
   }
 
+  function clearTransactions() {
+    setTransactions([])
+  }
+
   return (
-    <TransactionsContext.Provider value={{ transactions, createTransaction }}>
+    <TransactionsContext.Provider value={{ transactions, createTransaction, clearTransactions }}>
       {children}
     </TransactionsContext.Provider>
   )

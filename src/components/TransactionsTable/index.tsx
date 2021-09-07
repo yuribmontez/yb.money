@@ -2,7 +2,7 @@ import { useTransactions } from "../../hooks/useTransactions";
 import { Container } from "./styles";
 
 export function TransactionsTable() {
-  const { transactions } = useTransactions()
+  const { transactions, clearTransactions } = useTransactions()
 
   return (
     <Container>
@@ -13,6 +13,9 @@ export function TransactionsTable() {
             <th>Value</th>
             <th>Category</th>
             <th>Date</th>
+            <th>
+              <button onClick={clearTransactions}>Limpar</button>
+            </th>
           </tr>
         </thead>
 
@@ -29,6 +32,11 @@ export function TransactionsTable() {
               <td>{transaction.category}</td>
               <td>
                 {new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.createdAt))}
+              </td>
+              <td>
+              <button>
+                oi
+              </button>
               </td>
             </tr>
           ))}
