@@ -19,7 +19,7 @@ type TransactionInput = Omit<Transaction, 'id' | 'createdAt'>
 interface TransactionsContextData {
   transactions: Transaction[];
   createTransaction: (transaction: TransactionInput) => Promise<void>;
-  clearTransactions: () => void
+  clearTransactions: () => void;
 }
 
 

@@ -13,6 +13,11 @@ export const Container = styled.div`
       padding: 1rem 2rem;
       text-align: left;
       line-height: 1.5rem;
+
+      &:last-child {
+        text-align: right;
+        padding: 0;
+      }
     }
 
     td {
@@ -26,12 +31,38 @@ export const Container = styled.div`
         color: var(--text-title);
       }
 
+      &:last-child {
+        text-align: right;
+      }
+
       &.deposit {
         color: var(--green);
       }
 
       &.withdraw {
         color: var(--red);
+      }
+    }
+
+    button {
+      font-size: 1rem;
+      color: #FFF;
+      background: var(--red);
+      border: 0;
+      padding: 0 2rem;
+      border-radius: 0.25rem;
+      height: 3rem;
+
+      transition: filter 0.2s;
+
+      &:hover {
+        filter: brightness(0.9);
+      }
+
+      &.transaction-button {
+        background: none;
+        height: 0;
+        padding: 0;
       }
     }
   }
