@@ -45,10 +45,10 @@ Before starting 🏁, you need to have [Git](https://git-scm.com) and [Node](htt
 
 ```bash
 # Clone this project
-$ git clone https://github.com/yuribmontez/dtmoney
+$ git clone https://github.com/yuribmontez/yb.money.git
 
 # Access
-$ cd dtmoney
+$ cd yb.money
 
 # Install dependencies
 $ yarn
